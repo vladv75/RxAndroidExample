@@ -109,6 +109,11 @@ public class OperatorsExample {
                 .subscribe(textView::setText);
     }
 
+    public void Example3_3(final TextView textView, String url) {
+        queryTitle(url)
+                .subscribe(textView::setText);
+    }
+
     public void Example4(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(new Func1<List<String>, Observable<String>>() {
