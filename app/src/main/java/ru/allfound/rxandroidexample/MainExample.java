@@ -12,13 +12,13 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /*
- * OperatorsExample.java    v.1.0 05.07.2016
+ * .java    v.1.0 05.07.2016
  *
  * Copyright (c) 2015-2016 Vladislav Laptev,
  * All rights reserved. Used by permission.
  */
 
-public class OperatorsExample {
+public class MainExample {
 
     public void Example0(final TextView textView, String url) {
         queryURLs(url)
