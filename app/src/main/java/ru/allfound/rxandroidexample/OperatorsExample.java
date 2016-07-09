@@ -11,12 +11,14 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-/**
- * Created by vvv on 08.07.16.
+/*
+ * OperatorsExample.java    v.1.0 05.07.2016
+ *
+ * Copyright (c) 2015-2016 Vladislav Laptev,
+ * All rights reserved. Used by permission.
  */
 
 public class OperatorsExample {
-
     public void Example1(final TextView textView, String url) {
         queryURLs(url)
                 .subscribe(new Action1<List<String>>() {
@@ -143,12 +145,38 @@ public class OperatorsExample {
                 .subscribe(textView::setText);
     }
 
+    public void Example4_2(final TextView textView, String url) {
+        queryURLs(url)
+                .flatMap(Observable::from)
+                .take(2)
+                .flatMap(this::queryTitle)
+                .map(url1 -> textView.getText() + url1 + "\n\n")
+                .subscribe(textView::setText);
+    }
+
+    public void Example5(final TextView textView, String url) {
+        queryTitles(url)
+                .flatMap(Observable::from)
+                .subscribe(textView::setText);
+    }
+
     Observable<List<String>> queryURLs(String url) {
         WebParsing webParsing = new WebParsing();
         return Observable.create(new Observable.OnSubscribe<List<String>>() {
             @Override
             public void call(Subscriber<? super List<String>> subscriber) {
                 subscriber.onNext(webParsing.getURLs(url));
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    Observable<List<String>> queryTitles(String url) {
+        WebParsing webParsing = new WebParsing();
+        return Observable.create(new Observable.OnSubscribe<List<String>>() {
+            @Override
+            public void call(Subscriber<? super List<String>> subscriber) {
+                subscriber.onNext(webParsing.getTitles(url));
                 subscriber.onCompleted();
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());

@@ -11,9 +11,13 @@ import rx.Subscriber;
 import rx.functions.Action1;
 import rx.functions.Func1;
 
-/**
- * Created by vvv on 05.07.16.
+/*
+ * BaseExample.java    v.1.0 05.07.2016
+ *
+ * Copyright (c) 2015-2016 Vladislav Laptev,
+ * All rights reserved. Used by permission.
  */
+
 public class BaseExample {
 
     public void Example1(final TextView textView) {
@@ -22,7 +26,7 @@ public class BaseExample {
                 new Observable.OnSubscribe<String>() {
                     @Override
                     public void call(Subscriber<? super String> sub) {
-                        sub.onNext("Hello, Example1!");
+                        sub.onNext("Example1");
                         sub.onCompleted();
                     }
                 }
@@ -43,7 +47,7 @@ public class BaseExample {
     }
 
     public void Example2(final TextView textView) {
-        Observable<String> myObservable = Observable.just("Hello, Example2!");
+        Observable<String> myObservable = Observable.just("Example2");
 
         Action1<String> onNextAction = new Action1<String>() {
             @Override
@@ -56,7 +60,7 @@ public class BaseExample {
     }
 
     public void Example3(final TextView textView) {
-        Observable.just("Hello, Example3!")
+        Observable.just("Example3")
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
@@ -66,11 +70,11 @@ public class BaseExample {
     }
 
     public void ExampleMap1(final TextView textView) {
-        Observable.just("Hello, ExampleMap1!")
+        Observable.just("ExampleMap1")
                 .map(new Func1<String, String>() {
                     @Override
                     public String call(String s) {
-                        return s + " - Dan";
+                        return s + " + data...";
                     }
                 }).subscribe(new Action1<String>() {
             @Override
@@ -81,7 +85,7 @@ public class BaseExample {
     }
 
     public void ExampleMap2(final TextView textView) {
-        Observable.just("Hello, ExampleMap1!")
+        Observable.just("ExampleMap2")
                 .map(new Func1<String, Integer>() {
                     @Override
                     public Integer call(String s) {
@@ -96,7 +100,7 @@ public class BaseExample {
     }
 
     public void ExampleMap3(final TextView textView) {
-        Observable.just("Hello, ExampleMap1!")
+        Observable.just("ExampleMap3")
                 .map(new Func1<String, Integer>() {
                     @Override
                     public Integer call(String s) {
@@ -118,8 +122,8 @@ public class BaseExample {
     }
 
     public void ExampleMap3_1(final TextView textView) {
-        Observable.just("Hello, world!")
-                .map(s -> s + " -Dan")
+        Observable.just("ExampleMap3_1")
+                .map(s -> s + " + data...")
                 .map(String::hashCode)
                 .map(s -> Integer.toString(s))
                 .subscribe(textView::setText);

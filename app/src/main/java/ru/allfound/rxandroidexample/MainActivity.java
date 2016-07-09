@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         //baseExample.ExampleMap3_1(textView);
 
         OperatorsExample operatorsExample = new OperatorsExample();
-        operatorsExample.Example3_3(textView, "https://yandex.ru/");
+        operatorsExample.Example4_2(textView, "https://yandex.ru/");
     }
 
 }

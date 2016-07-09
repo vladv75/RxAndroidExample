@@ -57,6 +57,28 @@ public class WebParsing {
         return stringList;
     }
 
+    public List<String> getTitles(String url) {
+        Document doc;
+        List<String> stringList = new ArrayList<>();
+        try {
+            doc = Jsoup.connect(url).get();
+            Elements select = doc.select("a");
+            for (Element element : select) {
+                try {
+                    Document docTitle = Jsoup.connect(element.attr("href")).get();
+                    stringList.add(docTitle.title());
+                } catch (IOException exp) {
+                    exp.printStackTrace();
+                    stringList.add(null);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return stringList;
+    }
+
     public String getTitle(String url) {
         String title;
         try {
