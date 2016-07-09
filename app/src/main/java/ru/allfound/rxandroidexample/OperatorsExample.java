@@ -19,6 +19,20 @@ import rx.schedulers.Schedulers;
  */
 
 public class OperatorsExample {
+
+    public void Example0(final TextView textView, String url) {
+        queryURLs(url)
+                .subscribe(new Action1<List<String>>() {
+                    @Override
+                    public void call(List<String> urls) {
+                        for (String url: urls) {
+                            String string = (String) textView.getText();
+                            textView.setText(string + url + "\n\n");
+                        }
+                    }
+                });
+    }
+
     public void Example1(final TextView textView, String url) {
         queryURLs(url)
                 .subscribe(new Action1<List<String>>() {

@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
 
         OperatorsExample operatorsExample = new OperatorsExample();
-        operatorsExample.Example4_4(textView, "https://yandex.ru/");
+        operatorsExample.Example0(textView, "https://yandex.ru/");
     }
 
 }
