@@ -148,8 +148,26 @@ public class OperatorsExample {
     public void Example4_2(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(Observable::from)
-                .take(2)
                 .flatMap(this::queryTitle)
+                .map(url1 -> textView.getText() + url1 + "\n\n")
+                .subscribe(textView::setText);
+    }
+
+    public void Example4_3(final TextView textView, String url) {
+        queryURLs(url)
+                .flatMap(Observable::from)
+                .flatMap(this::queryTitle)
+                .filter(title -> title != null)
+                .map(url1 -> textView.getText() + url1 + "\n\n")
+                .subscribe(textView::setText);
+    }
+
+    public void Example4_4(final TextView textView, String url) {
+        queryURLs(url)
+                .flatMap(Observable::from)
+                .flatMap(this::queryTitle)
+                .filter(title -> title != null)
+                .take(7)
                 .map(url1 -> textView.getText() + url1 + "\n\n")
                 .subscribe(textView::setText);
     }

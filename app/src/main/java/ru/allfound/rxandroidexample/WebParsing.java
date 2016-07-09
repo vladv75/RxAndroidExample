@@ -1,11 +1,13 @@
 package ru.allfound.rxandroidexample;
 
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,8 +86,17 @@ public class WebParsing {
         try {
             Document doc = Jsoup.connect(url).get();
             title = doc.title();
+        } catch (MalformedURLException mue) {
+            mue.printStackTrace();
+            return null;
+        } catch (HttpStatusException hse) {
+            hse.printStackTrace();
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
+        } catch (IllegalArgumentException iae) {
+            iae.printStackTrace();
             return null;
         }
         return title;
