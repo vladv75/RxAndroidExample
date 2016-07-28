@@ -9,6 +9,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 /*
@@ -192,14 +193,54 @@ public class MainExample {
                 .subscribe(textView::setText);
     }
 
+    public void Example6(final TextView textView) {
+        Observable<List<String>> zipped
+                = Observable.zip(
+                queryURLs("https://yandex.ru/"),
+                queryURLs("https://mail.ru/"),
+                new Func2<List<String>, List<String>, List<String>>() {
+            @Override
+            public List<String> call(List<String> list1, List<String> list2) {
+                list1.addAll(list2);
+                return list1;
+            }
+        });
+
+        zipped
+                .flatMap(Observable::from)
+                .flatMap(this::queryTitle)
+                .filter(title -> title != null)
+                .map(url1 -> textView.getText() + url1 + "\n\n")
+                .subscribe(textView::setText);
+    }
+
+    public void Example6_1(final TextView textView) {
+        Observable<List<String>> zipped
+                = Observable.zip(
+                queryURLs("https://yandex.ru/"),
+                queryURLs("https://mail.ru/"),
+                (list1, list2) -> {
+                    list1.addAll(list2);
+                    return list1;
+                });
+
+        zipped
+                .flatMap(Observable::from)
+                .flatMap(this::queryTitle)
+                .filter(title -> title != null)
+                .map(url1 -> textView.getText() + url1 + "\n\n")
+                .subscribe(textView::setText);
+    }
+
     Observable<List<String>> queryURLs(String url) {
         WebParsing webParsing = new WebParsing();
-        return Observable.create(new Observable.OnSubscribe<List<String>>() {
-            @Override
-            public void call(Subscriber<? super List<String>> subscriber) {
-                subscriber.onNext(webParsing.getURLs(url));
-                subscriber.onCompleted();
-            }
+        return Observable.create(
+                new Observable.OnSubscribe<List<String>>() {
+                    @Override
+                    public void call(Subscriber<? super List<String>> subscriber) {
+                        subscriber.onNext(webParsing.getURLs(url));
+                        subscriber.onCompleted();
+                    }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
