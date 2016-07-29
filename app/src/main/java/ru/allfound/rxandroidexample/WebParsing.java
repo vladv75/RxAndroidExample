@@ -86,17 +86,17 @@ public class WebParsing {
         try {
             Document doc = Jsoup.connect(url).get();
             title = doc.title();
-        } catch (MalformedURLException mue) {
-            mue.printStackTrace();
+        } catch (MalformedURLException mue ) {
+            //mue.printStackTrace();
             return null;
         } catch (HttpStatusException hse) {
-            hse.printStackTrace();
+            //hse.printStackTrace();
             return null;
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         } catch (IllegalArgumentException iae) {
-            iae.printStackTrace();
+            //iae.printStackTrace();
             return null;
         }
         return title;

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RxAndroidExample</string>
+    <string name="loadButton">LOAD</string>
 </resources>
