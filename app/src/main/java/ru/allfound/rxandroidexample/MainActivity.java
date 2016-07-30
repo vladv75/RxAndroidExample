@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Action1<Void>() {
                     @Override
                     public void call(Void v) {
-                        mainExample.Example4_4(textView, "https://yandex.ru/");
+                        mainExample.example4_4(textView, "https://yandex.ru/");
                     }
                 });
     }

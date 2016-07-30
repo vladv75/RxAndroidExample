@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
 
 public class MainExample {
 
-    public void Example0(final TextView textView, String url) {
+    public void example0(final TextView textView, String url) {
         queryURLs(url)
                 .subscribe(new Action1<List<String>>() {
                     @Override
@@ -34,7 +34,7 @@ public class MainExample {
                 });
     }
 
-    public void Example1(final TextView textView, String url) {
+    public void example1(final TextView textView, String url) {
         queryURLs(url)
                 .subscribe(new Action1<List<String>>() {
                     @Override
@@ -51,7 +51,7 @@ public class MainExample {
                 });
     }
 
-    public void Example1_1(final TextView textView, String url) {
+    public void example1_1(final TextView textView, String url) {
         queryURLs(url)
                 .subscribe(urls -> {
                     Observable.from(urls)
@@ -62,7 +62,7 @@ public class MainExample {
                 });
     }
 
-    public void Example2(final TextView textView, String url) {
+    public void example2(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(new Func1<List<String>, Observable<String>>() {
                     @Override
@@ -79,7 +79,7 @@ public class MainExample {
                                 });
     }
 
-    public void Example2_1(final TextView textView, String url) {
+    public void example2_1(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(Observable::from)
                 .subscribe(url1 -> {
@@ -88,7 +88,7 @@ public class MainExample {
                 });
     }
 
-    public void Example3(final TextView textView, String url) {
+    public void example3(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(new Func1<List<String>, Observable<String>>() {
                     @Override
@@ -110,7 +110,7 @@ public class MainExample {
                 });
     }
 
-    public void Example3_1(final TextView textView, String url) {
+    public void example3_1(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(urls -> Observable.from(urls))
                 .map(url1 -> textView.getText() + url1 + "\n\n")
@@ -119,19 +119,19 @@ public class MainExample {
                 });
     }
 
-    public void Example3_2(final TextView textView, String url) {
+    public void example3_2(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(Observable::from)
                 .map(url1 -> textView.getText() + url1 + "\n\n")
                 .subscribe(textView::setText);
     }
 
-    public void Example3_3(final TextView textView, String url) {
+    public void example3_3(final TextView textView, String url) {
         queryTitle(url)
                 .subscribe(textView::setText);
     }
 
-    public void Example4(final TextView textView, String url) {
+    public void example4(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(new Func1<List<String>, Observable<String>>() {
                     @Override
@@ -153,14 +153,14 @@ public class MainExample {
                 });
     }
 
-    public void Example4_1(final TextView textView, String url) {
+    public void example4_1(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(Observable::from)
                 .flatMap(this::queryTitle)
                 .subscribe(textView::setText);
     }
 
-    public void Example4_2(final TextView textView, String url) {
+    public void example4_2(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(Observable::from)
                 .flatMap(this::queryTitle)
@@ -168,7 +168,7 @@ public class MainExample {
                 .subscribe(textView::setText);
     }
 
-    public void Example4_3(final TextView textView, String url) {
+    public void example4_3(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(Observable::from)
                 .flatMap(this::queryTitle)
@@ -177,7 +177,7 @@ public class MainExample {
                 .subscribe(textView::setText);
     }
 
-    public void Example4_4(final TextView textView, String url) {
+    public void example4_4(final TextView textView, String url) {
         queryURLs(url)
                 .flatMap(Observable::from)
                 .flatMap(this::queryTitle)
@@ -187,13 +187,13 @@ public class MainExample {
                 .subscribe(textView::setText);
     }
 
-    public void Example5(final TextView textView, String url) {
+    public void example5(final TextView textView, String url) {
         queryTitles(url)
                 .flatMap(Observable::from)
                 .subscribe(textView::setText);
     }
 
-    public void Example6(final TextView textView) {
+    public void example6(final TextView textView) {
         Observable<List<String>> zipped
                 = Observable.zip(
                 queryURLs("https://yandex.ru/"),
@@ -214,7 +214,7 @@ public class MainExample {
                 .subscribe(textView::setText);
     }
 
-    public void Example6_1(final TextView textView) {
+    public void example6_1(final TextView textView) {
         Observable<List<String>> zipped
                 = Observable.zip(
                 queryURLs("https://yandex.ru/"),
